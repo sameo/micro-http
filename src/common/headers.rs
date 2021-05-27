@@ -355,12 +355,14 @@ pub enum MediaType {
     PlainText,
     /// Media Type: "application/json".
     ApplicationJson,
+    /// Media Type: "text/html".
+    HtmlText,
 }
 
 impl Default for MediaType {
     /// Default value for MediaType is application/json
     fn default() -> Self {
-        Self::ApplicationJson
+        Self::HtmlText
     }
 }
 
@@ -389,6 +391,7 @@ impl MediaType {
         match utf8_slice.as_str().trim() {
             "text/plain" => Ok(Self::PlainText),
             "application/json" => Ok(Self::ApplicationJson),
+            "text/html" => Ok(Self::HtmlText),
             _ => Err(RequestError::InvalidRequest),
         }
     }
@@ -407,6 +410,7 @@ impl MediaType {
         match self {
             Self::PlainText => "text/plain",
             Self::ApplicationJson => "application/json",
+            Self::HtmlText => "text/html",
         }
     }
 }
